@@ -1,7 +1,7 @@
 import "./App.css";
 import UserDetailsList from "./components/UserDetailsList/UserDetailsList";
 import NewUserCard from "./components/UI/NewUserCard";
-import { useState } from "react";
+import React, { useState } from "react";
 import UserForm from "./components/NewUser/UserForm";
 
 const initialList = [
@@ -31,12 +31,12 @@ function App() {
   };
 
   return (
-    <div>
+    <React.Fragment>
       <NewUserCard>
         <UserForm onAddUser={addUserHandler} />
       </NewUserCard>
       <UserDetailsList users={userList} onDeleteUser={onDeleteUserHandler} />
-    </div>
+    </React.Fragment>
   );
 }
 

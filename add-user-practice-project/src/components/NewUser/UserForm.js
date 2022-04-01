@@ -3,6 +3,7 @@ import { useState } from "react";
 import Card from "../UI/Card";
 import Button from "../UI/Button";
 import ErrorModal from "../UI/ErrorModal";
+import Wrapper from "../Helpers/Wrapper"
 
 const UserForm = (props) => {
   const [userName, setUserName] = useState("");
@@ -35,7 +36,7 @@ const UserForm = (props) => {
   };
 
   return (
-    <div>
+    <Wrapper>
       {showError && (
         <ErrorModal
           title="An error occured"
@@ -69,7 +70,7 @@ const UserForm = (props) => {
           </div>
         </form>
       </Card>
-    </div>
+    </Wrapper>
   );
 };
 
