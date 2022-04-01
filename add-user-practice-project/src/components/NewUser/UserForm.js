@@ -1,11 +1,13 @@
 import styles from "./UserForm.module.css";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Card from "../UI/Card";
 import Button from "../UI/Button";
 import ErrorModal from "../UI/ErrorModal";
-import Wrapper from "../Helpers/Wrapper"
+import Wrapper from "../Helpers/Wrapper";
 
 const UserForm = (props) => {
+  const nameInputRef = useRef();
+
   const [userName, setUserName] = useState("");
   const [age, setAge] = useState(0);
   const [showError, setShowError] = useState(false);
@@ -20,8 +22,8 @@ const UserForm = (props) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
+    console.log(nameInputRef.current.value)
     if (userName.trim().length > 0 && +age >= 0) {
-      console.log(userName.trim);
       const temp = { details: userName + " (" + age + " years old)" };
       props.onAddUser(temp);
       setUserName("");
@@ -53,6 +55,7 @@ const UserForm = (props) => {
                 type="text"
                 value={userName}
                 onChange={userNameChangeHandler}
+                ref={nameInputRef}
               />
             </div>
             <div>
