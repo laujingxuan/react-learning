@@ -5,9 +5,18 @@ const redux = require("redux");
 //then the return will be the new state
 //a default value must be set for state for reducer function (else will have error)
 const counterReducer = (state = { counter: 0 }, action) => {
-  return {
-    counter: state.counter + 1,
-  };
+  if (action.type === "increment") {
+    return {
+      counter: state.counter + 1,
+    };
+  }
+
+  if (action.type === "decrement") {
+    return {
+      counter: state.counter - 1,
+    };
+  }
+  return state;
 };
 
 const store = redux.createStore(counterReducer);
@@ -24,4 +33,5 @@ store.subscribe(counterSubsciber);
 
 //dispatch an action to trigger the reducer
 //type can be any action you like (like useReducer)
-store.dispatch({type:'increment'})
+store.dispatch({ type: "increment" });
+store.dispatch({ type: "decrement" });
