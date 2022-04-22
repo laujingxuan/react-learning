@@ -1,28 +1,12 @@
-import { createStore } from "redux";
+import { configureStore } from "@reduxjs/toolkit";
+import counterReducer from "./counter";
+import authReducer from "./auth";
 
-const initialState = { counter: 0, showCounter: true };
-
-const counterReducer = (state = initialState, action) => {
-  if (action.type === "increment") {
-    //return state of reducer will overwrite the previous state
-    //never overwrite the existing state, we should always return a brand new object
-    return {
-      counter: state.counter + action.amount,
-      showCounter: state.showCounter,
-    };
-  }
-
-  if (action.type === "decrement") {
-    return { counter: state.counter - 1, showCounter: state.showCounter };
-  }
-
-  if (action.type === "toggle") {
-    return { showCounter: !state.showCounter, counter: state.counter };
-  }
-
-  return state;
-};
-
-const store = createStore(counterReducer);
+//configureStore allows us to set multiple slices' reducers into the store
+//just set an object with different field made up of reducer function into the reducer field
+const store = configureStore({
+  //to access the store in component with useSelector, just pass state.counter.counter or state.counter.showCounter
+  reducer: { counter: counterReducer, auth: authReducer },
+});
 
 export default store;

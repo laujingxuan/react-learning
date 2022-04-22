@@ -1,27 +1,28 @@
 import classes from "./Counter.module.css";
 import { useSelector, useDispatch } from "react-redux";
+import { counterActions } from "../store/counter";
 
 const Counter = () => {
   //useSelector allows us to access the data managed in our redux store
   //we will need a function parameter that basically helps to determine which piece of data we want to extract from redux store
   //changes on store will causes this component that uses redux store to be reexecuted as well (subscription is automatically added)
-  const counter = useSelector((state) => state.counter);
-  const show = useSelector((state) => state.showCounter);
-
+  const counter = useSelector((state) => state.counter.counter);
+  const show = useSelector((state) => state.counter.showCounter);
   //useDispatch hook helps to dispatch the action to ur redux store
   //dun need to pass in any arguments
   const dispatch = useDispatch();
 
   const incrementHandler = (value) => {
-    dispatch({ type: "increment", amount: value });
+    //value can be accessed in the store by action.payload
+    dispatch(counterActions.increment(value)); // {type: SOME_UNIQUE_IDENTIFIER, payload: <your value>}
   };
 
   const decrementHandler = () => {
-    dispatch({ type: "decrement" });
+    dispatch(counterActions.decrement());
   };
 
   const toggleCounterHandler = () => {
-    dispatch({ type: "toggle" });
+    dispatch(counterActions.toggleCounter());
   };
 
   return (
